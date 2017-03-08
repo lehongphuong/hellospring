@@ -1,0 +1,233 @@
+create database FPT
+USE [FPT]
+GO
+/****** Object:  Table [dbo].[Categories]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categories](
+	[cateId] [int] IDENTITY(1,1) NOT NULL,
+	[menuId] [int] NULL,
+	[name] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Categories] PRIMARY KEY CLUSTERED 
+(
+	[cateId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Code]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Code](
+	[codeId] [int] IDENTITY(1,1) NOT NULL,
+	[submitId] [int] NULL,
+	[code] [text] NULL,
+ CONSTRAINT [PK_Code] PRIMARY KEY CLUSTERED 
+(
+	[codeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Editorial]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Editorial](
+	[editId] [int] IDENTITY(1,1) NOT NULL,
+	[subId] [int] NULL,
+	[explain] [text] NULL,
+	[code] [text] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Leaderboard]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Leaderboard](
+	[leadId] [int] IDENTITY(1,1) NOT NULL,
+	[subId] [int] NULL,
+	[userId] [int] NULL,
+	[codeId] [int] NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[menu]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[menu](
+	[menuId] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](50) NULL,
+	[positive] [int] NULL,
+ CONSTRAINT [PK_menu] PRIMARY KEY CLUSTERED 
+(
+	[menuId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Problem]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Problem](
+	[proId] [int] IDENTITY(1,1) NOT NULL,
+	[subId] [int] NULL,
+	[description] [text] NULL,
+	[constrain] [text] NULL,
+	[inputRequire] [text] NULL,
+	[outputRequire] [text] NULL,
+	[inputTestcase] [text] NULL,
+	[outputTestcase] [text] NULL,
+	[explain] [text] NULL,
+	[inputUser] [text] NULL,
+ CONSTRAINT [PK_Problem] PRIMARY KEY CLUSTERED 
+(
+	[proId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[statusId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[subId] [int] NULL,
+	[status] [bit] NULL,
+ CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+(
+	[statusId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Subject]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Subject](
+	[subId] [int] IDENTITY(1,1) NOT NULL,
+	[cateId] [int] NOT NULL,
+	[title] [nvarchar](50) NULL,
+	[successRate] [float] NULL,
+	[maxScore] [int] NULL,
+	[difficutly] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Subject] PRIMARY KEY CLUSTERED 
+(
+	[subId] ASC,
+	[cateId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Submit]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Submit](
+	[submitId] [int] IDENTITY(1,1) NOT NULL,
+	[subId] [int] NULL,
+	[userId] [int] NULL,
+	[time] [date] NULL,
+	[point] [float] NULL,
+ CONSTRAINT [PK_Submit] PRIMARY KEY CLUSTERED 
+(
+	[submitId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Testcase]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Testcase](
+	[testId] [int] IDENTITY(1,1) NOT NULL,
+	[subId] [int] NULL,
+	[input] [text] NULL,
+	[output] [text] NULL,
+	[timeAsk] [float] NULL,
+ CONSTRAINT [PK_Testcase] PRIMARY KEY CLUSTERED 
+(
+	[testId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Tutorial]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tutorial](
+	[tuId] [int] IDENTITY(1,1) NOT NULL,
+	[subId] [int] NULL,
+	[title] [text] NULL,
+	[positive] [int] NULL,
+	[active] [bit] NULL,
+ CONSTRAINT [PK_Tutorial] PRIMARY KEY CLUSTERED 
+(
+	[tuId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[TutorialCode]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TutorialCode](
+	[tuCoId] [int] IDENTITY(1,1) NOT NULL,
+	[tuId] [int] NULL,
+	[description] [text] NULL,
+	[code] [text] NULL,
+	[positive] [int] NULL,
+ CONSTRAINT [PK_TutorialCode] PRIMARY KEY CLUSTERED 
+(
+	[tuCoId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 3/8/2017 12:17:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+	[userId] [int] IDENTITY(1,1) NOT NULL,
+	[username] [nvarchar](50) NULL,
+	[password] [nvarchar](50) NULL,
+	[avatar] [nvarchar](50) NULL,
+	[university] [nvarchar](50) NULL,
+	[point] [float] NULL,
+	[typeUser] [int] NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[userId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+USE [master]
+GO
+ALTER DATABASE [FPT] SET  READ_WRITE 
+GO
